@@ -109,7 +109,47 @@ namespace AttackOfTheKarens {
       lblMoneySavedLabel.Left = this.Width - lblMoneySavedLabel.Width - 10;
       lblMoneySavedLabel.Top = 0;
       lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
-    }
+
+        Button PU1 = new Button();
+        PU1.Location = new Point(1369, 100);
+        PU1.Text = "Speed Up";
+        PU1.AutoSize = true;
+        PU1.BackColor = Color.LightBlue;
+        PU1.Padding = new Padding(6);
+        PU1.Font = new Font("Arial", 11);
+        this.Controls.Add(PU1);
+        PU1.BringToFront();
+
+        Button PU2 = new Button();
+        PU2.Location = new Point(1369, 150);
+        PU2.Text = "Bomb";
+        PU2.AutoSize = true;
+        PU2.BackColor = Color.LightBlue;
+        PU2.Padding = new Padding(6);
+        PU2.Font = new Font("Arial", 11);
+        this.Controls.Add(PU2);
+        PU2.BringToFront();
+
+        Button PU3 = new Button();
+        PU3.Location = new Point(1369, 200);
+        PU3.Text = "Hire Staff";
+        PU3.AutoSize = true;
+        PU3.BackColor = Color.LightBlue;
+        PU3.Padding = new Padding(6);
+        PU3.Font = new Font("Arial", 11);
+        this.Controls.Add(PU3);
+        PU3.BringToFront();
+
+        Button PU4 = new Button();
+        PU4.Location = new Point(1369, 250);
+        PU4.Text = "Close Pools";
+        PU4.AutoSize = true;
+        PU4.BackColor = Color.LightBlue;
+        PU4.Padding = new Padding(6);
+        PU4.Font = new Font("Arial", 11);
+        this.Controls.Add(PU4);
+        PU4.BringToFront();
+        }
 
     private void FrmMall_Load(object sender, EventArgs e) {
       stores = new List<Store>();
