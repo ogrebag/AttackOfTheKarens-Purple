@@ -110,45 +110,16 @@ namespace AttackOfTheKarens {
       lblMoneySavedLabel.Top = 0;
       lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
 
-        Button PU1 = new Button();
-        PU1.Location = new Point(1369, 100);
-        PU1.Text = "Speed Up";
-        PU1.AutoSize = true;
-        PU1.BackColor = Color.LightBlue;
-        PU1.Padding = new Padding(6);
-        PU1.Font = new Font("Arial", 11);
-        this.Controls.Add(PU1);
-        PU1.BringToFront();
+            button1.Text = "Speed Up";
+            button2.Text = "Bomb";
+            button3.Text = "Hire";
+            button4.Text = "Close Pools";
 
-        Button PU2 = new Button();
-        PU2.Location = new Point(1369, 150);
-        PU2.Text = "Bomb";
-        PU2.AutoSize = true;
-        PU2.BackColor = Color.LightBlue;
-        PU2.Padding = new Padding(6);
-        PU2.Font = new Font("Arial", 11);
-        this.Controls.Add(PU2);
-        PU2.BringToFront();
+            button1.Location = new Point(1369, 100);
+            button2.Location = new Point(1369, 150);
+            button3.Location = new Point(1369, 200);
+            button4.Location = new Point(1369, 250);
 
-        Button PU3 = new Button();
-        PU3.Location = new Point(1369, 200);
-        PU3.Text = "Hire Staff";
-        PU3.AutoSize = true;
-        PU3.BackColor = Color.LightBlue;
-        PU3.Padding = new Padding(6);
-        PU3.Font = new Font("Arial", 11);
-        this.Controls.Add(PU3);
-        PU3.BringToFront();
-
-        Button PU4 = new Button();
-        PU4.Location = new Point(1369, 250);
-        PU4.Text = "Close Pools";
-        PU4.AutoSize = true;
-        PU4.BackColor = Color.LightBlue;
-        PU4.Padding = new Padding(6);
-        PU4.Font = new Font("Arial", 11);
-        this.Controls.Add(PU4);
-        PU4.BringToFront();
         }
 
     private void FrmMall_Load(object sender, EventArgs e) {
@@ -157,6 +128,7 @@ namespace AttackOfTheKarens {
       GenerateMall(colors[rand.Next(colors.Length)]);
       tmrKarenSpawner.Interval = rand.Next(1000, 5000);
       tmrKarenSpawner.Enabled = true;
+      tmrMoveOwner.Interval = 250;
       player = new SoundPlayer();
       player.SoundLocation = "data/mall music.wav";
       player.PlayLooping();
@@ -247,5 +219,28 @@ namespace AttackOfTheKarens {
     private void tmrUpdateGame_Tick(object sender, EventArgs e) {
       lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
     }
-  }
+        // speed up
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tmrMoveOwner.Interval -= 10;
+        }
+
+        // bomb
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // hire
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // close pools
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
