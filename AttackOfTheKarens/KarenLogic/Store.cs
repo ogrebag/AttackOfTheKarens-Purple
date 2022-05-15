@@ -3,6 +3,7 @@
     private Karen karen;
     private bool containsOwner;
     private bool containsBomb;
+    private bool horde;
 
     public Store(Karen karen) {
       this.karen = karen;
@@ -26,6 +27,16 @@
             containsBomb = false;
         }
 
+    public void HordeStart()
+        {
+            horde = true;
+        }
+
+    public void HordeEnd()
+        {
+            horde = false;
+        }
+
     public void ResetOwner() {
       containsOwner = false;
     }
@@ -37,6 +48,10 @@
       if(karen.IsPresent && containsBomb)
             {
             karen.Damage(1);
+            }
+            if (!karen.IsPresent && horde)
+            {
+                karen.Appear();
             }
     }
   }

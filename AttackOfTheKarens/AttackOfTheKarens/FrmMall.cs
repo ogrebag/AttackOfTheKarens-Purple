@@ -112,14 +112,11 @@ namespace AttackOfTheKarens {
 
             button1.Text = "Speed Up";
             button2.Text = "Bomb";
-            button3.Text = "Hire";
-            button4.Text = "Close Pools";
+            button3.Text = "Horde";
 
             button1.Location = new Point(1369, 100);
             button2.Location = new Point(1369, 150);
             button3.Location = new Point(1369, 200);
-            button4.Location = new Point(1369, 250);
-
         }
 
     private void FrmMall_Load(object sender, EventArgs e) {
@@ -129,6 +126,7 @@ namespace AttackOfTheKarens {
       tmrKarenSpawner.Interval = rand.Next(1000, 5000);
       tmrKarenSpawner.Enabled = true;
       tmrMoveOwner.Interval = 250;
+      timer1.Interval = 60000;
       player = new SoundPlayer();
       player.SoundLocation = "data/mall music.wav";
       player.PlayLooping();
@@ -248,22 +246,18 @@ namespace AttackOfTheKarens {
 
         }
 
-        // hire
+        // horde
         private void button3_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if(money >= 50){
-            // spawn new instance of owner
-            }
-        }
-
-        // close pools
-        private void button4_Click(object sender, EventArgs e)
-        {
-            float money = Game.CheckScore();
-            if(money >= 5){
-            // either change pool to ground temporarily or 
-            // make it so that owners can walk on water temporarily
+            if(money >= 30){
+                Game.SubFromScore(30);
+                foreach (Store store in stores)
+                {
+                    store.HordeStart();
+                    store.Update();
+                    store.HordeEnd();
+                }
             }
         }
     }
