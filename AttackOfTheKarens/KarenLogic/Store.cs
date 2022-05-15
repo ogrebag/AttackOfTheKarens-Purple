@@ -2,6 +2,7 @@
   public class Store {
     private Karen karen;
     private bool containsOwner;
+    private bool containsBomb;
 
     public Store(Karen karen) {
       this.karen = karen;
@@ -15,6 +16,16 @@
       containsOwner = true;
     }
 
+    public void BombUsed()
+        {
+            containsBomb = true;
+        }
+
+    public void BombFinished()
+        {
+            containsBomb = false;
+        }
+
     public void ResetOwner() {
       containsOwner = false;
     }
@@ -23,6 +34,10 @@
       if (karen.IsPresent && containsOwner) {
         karen.Damage(1);
       }
+      if(karen.IsPresent && containsBomb)
+            {
+            karen.Damage(1);
+            }
     }
   }
 }

@@ -222,25 +222,49 @@ namespace AttackOfTheKarens {
         // speed up
         private void button1_Click(object sender, EventArgs e)
         {
-            tmrMoveOwner.Interval -= 10;
+            float money = Game.CheckScore();
+            if(money >= 10){
+                if(tmrMoveOwner.Interval >= 10)
+                {
+                    Game.SubFromScore(10);
+                    tmrMoveOwner.Interval -= 10;
+                }
+            }
         }
 
         // bomb
         private void button2_Click(object sender, EventArgs e)
         {
+            float money = Game.CheckScore();
+            
+            if(money >= 50){
+                Game.SubFromScore(50);
+                foreach (Store store in stores) {
+                    store.BombUsed();
+                    store.Update();
+                    store.BombFinished();
+                }
+            }
 
         }
 
         // hire
         private void button3_Click(object sender, EventArgs e)
         {
-
+            float money = Game.CheckScore();
+            if(money >= 50){
+            // spawn new instance of owner
+            }
         }
 
         // close pools
         private void button4_Click(object sender, EventArgs e)
         {
-
+            float money = Game.CheckScore();
+            if(money >= 5){
+            // either change pool to ground temporarily or 
+            // make it so that owners can walk on water temporarily
+            }
         }
     }
 }
