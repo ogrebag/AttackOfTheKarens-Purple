@@ -123,28 +123,39 @@ namespace AttackOfTheKarens
                 top += CELL_SIZE;
             }
 
-            picOwner.BringToFront();
-            panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
-            panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
-            this.Width = panMall.Width + FORM_PADDING + 75;
-            this.Height = panMall.Height + FORM_PADDING;
-            lblMoneySaved.Left = this.Width - lblMoneySaved.Width - 10;
-            lblMoneySavedLabel.Left = this.Width - lblMoneySavedLabel.Width - 10;
-            lblMoneySavedLabel.Top = 0;
-            lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
+      picOwner.BringToFront();
+      panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
+      panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
+      this.Width = panMall.Width + FORM_PADDING + 75;
+      this.Height = panMall.Height + FORM_PADDING;
+      lblMoneySaved.Left = this.Width - lblMoneySaved.Width - 10;
+      lblMoneySavedLabel.Left = this.Width - lblMoneySavedLabel.Width - 10;
+      lblMoneySavedLabel.Top = 0;
+      lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
+
+            button1.Text = "Speed Up";
+            button2.Text = "Bomb";
+            button3.Text = "Hire";
+            button4.Text = "Close Pools";
+
+            button1.Location = new Point(1369, 100);
+            button2.Location = new Point(1369, 150);
+            button3.Location = new Point(1369, 200);
+            button4.Location = new Point(1369, 250);
+
         }
 
-        private void FrmMall_Load(object sender, EventArgs e)
-        {
-            stores = new List<Store>();
-            LoadMap();
-            GenerateMall(colors[rand.Next(colors.Length)]);
-            tmrKarenSpawner.Interval = rand.Next(1000, 5000);
-            tmrKarenSpawner.Enabled = true;
-            player = new SoundPlayer();
-            player.SoundLocation = "data/mall music.wav";
-            player.PlayLooping();
-        }
+    private void FrmMall_Load(object sender, EventArgs e) {
+      stores = new List<Store>();
+      LoadMap();
+      GenerateMall(colors[rand.Next(colors.Length)]);
+      tmrKarenSpawner.Interval = rand.Next(1000, 5000);
+      tmrKarenSpawner.Enabled = true;
+      tmrMoveOwner.Interval = 250;
+      player = new SoundPlayer();
+      player.SoundLocation = "data/mall music.wav";
+      player.PlayLooping();
+    }
 
         private bool IsInBounds(int newRow, int newCol)
         {
@@ -244,6 +255,33 @@ namespace AttackOfTheKarens
             Move(dir);
         }
 
+    private void tmrUpdateGame_Tick(object sender, EventArgs e) {
+      lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
+    }
+        // speed up
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tmrMoveOwner.Interval -= 10;
+        }
+
+        // bomb
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // hire
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // close pools
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
         private void tmrUpdateGame_Tick(object sender, EventArgs e)
         {
             lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
