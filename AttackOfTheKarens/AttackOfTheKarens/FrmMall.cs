@@ -88,7 +88,7 @@ namespace AttackOfTheKarens
                             break;
                         case 'S':
                             pic = CreatePic(Properties.Resources.superkaren, top, left);
-                            Store s2 = new Store(new Karen(pic)
+                            Store s2 = new Store(new SuperKaren(pic)
                             {
                                 Row = top / CELL_SIZE,
                                 Col = left / CELL_SIZE,
