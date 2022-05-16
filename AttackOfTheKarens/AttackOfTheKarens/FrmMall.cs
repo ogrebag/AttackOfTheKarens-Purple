@@ -14,7 +14,8 @@ namespace AttackOfTheKarens {
     private const int FORM_PADDING = 60;
     private const int CELL_SIZE = 64;
     private readonly Random rand = new Random();
-    private readonly Color[] colors = new Color[5] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow };
+    private readonly Color[] colors = new Color[15] { Color.Bisque, Color.Goldenrod, Color.OldLace, Color.PaleVioletRed, Color.MidnightBlue, Color.Beige,
+    Color.Firebrick, Color.GhostWhite, Color.PeachPuff, Color.Gainsboro, Color.Salmon, Color.Thistle, Color.SlateGray, Color.Azure, Color.DarkSeaGreen };
     private Map currentMap = Map.map1;
 
     // other privates
@@ -27,7 +28,7 @@ namespace AttackOfTheKarens {
     private int yOwner2;
     private char[][] map;
     private List<Store> stores;
-    private string fileContents = File.ReadAllText("data/mall5.txt");
+    private string fileContents = File.ReadAllText("data/mall1.txt");
 
     enum Map
         {
@@ -95,6 +96,7 @@ namespace AttackOfTheKarens {
           switch (c) {
             case 'K':
               pic = CreatePic(Properties.Resources.karen, top, left);
+              pic = CreatePic(Properties.Resources.karen, top, left);
               Store s = new Store(new Karen(pic) {
                 Row = top / CELL_SIZE,
                 Col = left / CELL_SIZE,
@@ -102,22 +104,19 @@ namespace AttackOfTheKarens {
               stores.Add(s);
               break;
             case 'o':
-                int n = rand.Next(5);
+                int n = rand.Next(4);
                 switch (n)
                 {
                     case 0:
-                        picOwner = CreatePic(Properties.Resources.owner, top, left);
-                        break;
-                    case 1:
                         picOwner = CreatePic(Properties.Resources.owner_pi, top, left);
                         break;
-                    case 2:
+                    case 1:
                         picOwner = CreatePic(Properties.Resources.owner_w, top, left);
                         break;
-                    case 3:
+                    case 2:
                         picOwner = CreatePic(Properties.Resources.owner_p, top, left);
                         break;
-                    case 4:
+                    case 3:
                         picOwner = CreatePic(Properties.Resources.owner_r, top, left);
                         break;
                 }
