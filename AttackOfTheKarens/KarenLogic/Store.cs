@@ -14,8 +14,10 @@
         }
 
     public void ActivateTheKaren() {
-      karen.Appear();
-      superkaren.Appear();
+
+        karen.Appear();
+        superkaren.Appear();
+            
     }
 
     public void OwnerWalksIn() {
@@ -31,6 +33,7 @@
             {
                 karen.Damage(1);
             }
+            
             else if (superkaren.IsPresent && containsOwner)
             {
                 superkaren.Damage(1);
