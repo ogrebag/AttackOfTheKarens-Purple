@@ -8,6 +8,14 @@ using System.Media;
 using System.Windows.Forms;
 
 namespace AttackOfTheKarens {
+
+    enum Map{
+        map1,
+        map2,
+        map3,
+        map4,
+        mapBoss
+    }
   public partial class FrmMall : Form {
     // consts
     private const int PANEL_PADDING = 10;
@@ -24,23 +32,71 @@ namespace AttackOfTheKarens {
     private char[][] map;
     private List<Store> stores;
 
-    // ctor
-    public FrmMall() {
+    // public enum
+    Map currentMap = Map.map1;
+
+        // ctor
+        public FrmMall() {
       Game.openForms.Add(this);
       InitializeComponent();
     }
 
     // functions
     private void LoadMap() {
-      string fileContents = File.ReadAllText("data/mall.txt");
-      string[] lines = fileContents.Split(Environment.NewLine);
-      map = new char[lines.Length][];
-      for (int i = 0; i < lines.Length; i++) {
-        map[i] = lines[i].ToCharArray();
-      }
-    }
+            Random random = new Random();
+            int mapNum = random.Next(1, 4);
+            switch (mapNum)
+            {
+                case 1:
+                    fileContents = File.ReadAllText("data/mall1.txt");
+                    lines = fileContents.Split(Environment.NewLine);
+                    map = new char[lines.Length][];
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        map[i] = lines[i].ToCharArray();
+                    }
+                    break;
+                case 2:
+                    fileContents = File.ReadAllText("data/mall2.txt");
+                    lines = fileContents.Split(Environment.NewLine);
+                    map = new char[lines.Length][];
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        map[i] = lines[i].ToCharArray();
+                    }
+                    break;
+                case 3:
+                    fileContents = File.ReadAllText("data/mall3.txt");
+                    lines = fileContents.Split(Environment.NewLine);
+                    map = new char[lines.Length][];
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        map[i] = lines[i].ToCharArray();
+                    }
+                    break;
+                case 4:
+                    fileContents = File.ReadAllText("data/mall4.txt");
+                    lines = fileContents.Split(Environment.NewLine);
+                    map = new char[lines.Length][];
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        map[i] = lines[i].ToCharArray();
+                    }
+                    break;
+                case 5:
+                    fileContents = File.ReadAllText("data/mall5.txt");
+                    lines = fileContents.Split(Environment.NewLine);
+                    map = new char[lines.Length][];
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        map[i] = lines[i].ToCharArray();
+                    }
+                    break;
+            }
 
-    private PictureBox CreatePic(Image img, int top, int left) {
+        }
+
+        private PictureBox CreatePic(Image img, int top, int left) {
       return new PictureBox() {
         Image = img,
         Top = top,
@@ -113,10 +169,12 @@ namespace AttackOfTheKarens {
             button1.Text = "Speed Up";
             button2.Text = "Bomb";
             button3.Text = "Horde";
+            button4.Text = "Next Stage";
 
             button1.Location = new Point(1369, 100);
             button2.Location = new Point(1369, 150);
             button3.Location = new Point(1369, 200);
+            button4.Location = new Point(1369, 250);
         }
 
     private void FrmMall_Load(object sender, EventArgs e) {
@@ -257,6 +315,39 @@ namespace AttackOfTheKarens {
                     store.HordeStart();
                     store.Update();
                     store.HordeEnd();
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            float money = Game.CheckScore();
+            if(money >= 0)
+            {
+                Game.SubFromScore();
+                if(currentMap == Map.map1)
+                {
+                    currentMap = Map.map2;
+                    // do the thing
+                }
+                else if(currentMap == Map.map2){
+                    currentMap = Map.map3;
+                    // do the thing
+                }
+                else if(currentMap == Map.map3)
+                {
+                    currentMap = Map.map4;
+                    // do the thing
+                }
+                else if(currentMap == Map.map4)
+                {
+                    currentMap = Map.mapBoss;
+                    // do the thing
+                }
+                else
+                {
+                    currentMap = Map.map1;
+                    // prestige
                 }
             }
         }
