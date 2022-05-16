@@ -86,6 +86,15 @@ namespace AttackOfTheKarens
                             });
                             stores.Add(s);
                             break;
+                        case 'S':
+                            pic = CreatePic(Properties.Resources.superkaren, top, left);
+                            Store s2 = new Store(new Karen(pic)
+                            {
+                                Row = top / CELL_SIZE,
+                                Col = left / CELL_SIZE,
+                            });
+                            stores.Add(s2);
+                            break;
                         case 'o':
                             picOwner = CreatePic(Properties.Resources.owner, top, left);
                             xOwner = left / CELL_SIZE;
@@ -242,7 +251,7 @@ namespace AttackOfTheKarens
 
         private void panMall_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void panMall_MouseDown(object sender, MouseEventArgs e)

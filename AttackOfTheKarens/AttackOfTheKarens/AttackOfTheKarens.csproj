@@ -63,7 +63,7 @@
     <None Update="data\karen.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="data\karen.png">
+    <None Update="data\superkaren.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="data\mall bg.jpg">
