@@ -336,7 +336,7 @@ namespace AttackOfTheKarens {
         }
 
         private void tmrUpdateGame_Tick(object sender, EventArgs e) {
-      lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
+      lblMoneySaved.Text = Game.Score.ToString("$ #,##00.00");
     }
         // speed up
         private void button1_Click(object sender, EventArgs e)

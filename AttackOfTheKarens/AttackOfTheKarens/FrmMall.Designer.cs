@@ -42,10 +42,10 @@
             // 
             this.panMall.BackColor = System.Drawing.Color.Transparent;
             this.panMall.BackgroundImage = global::AttackOfTheKarens.Properties.Resources.mall_bg;
-            this.panMall.Location = new System.Drawing.Point(14, 16);
-            this.panMall.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panMall.Location = new System.Drawing.Point(23, 26);
+            this.panMall.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.panMall.Name = "panMall";
-            this.panMall.Size = new System.Drawing.Size(641, 719);
+            this.panMall.Size = new System.Drawing.Size(1042, 1150);
             this.panMall.TabIndex = 0;
             this.panMall.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panMall_MouseDown_1);
             // 
@@ -70,9 +70,10 @@
             this.lblMoneySaved.AutoSize = true;
             this.lblMoneySaved.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneySaved.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblMoneySaved.Location = new System.Drawing.Point(1229, -1);
+            this.lblMoneySaved.Location = new System.Drawing.Point(1997, -2);
+            this.lblMoneySaved.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMoneySaved.Name = "lblMoneySaved";
-            this.lblMoneySaved.Size = new System.Drawing.Size(119, 41);
+            this.lblMoneySaved.Size = new System.Drawing.Size(194, 65);
             this.lblMoneySaved.TabIndex = 1;
             this.lblMoneySaved.Text = "$ 00.00";
             this.lblMoneySaved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -82,9 +83,10 @@
             this.lblMoneySavedLabel.AutoSize = true;
             this.lblMoneySavedLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneySavedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblMoneySavedLabel.Location = new System.Drawing.Point(1048, 8);
+            this.lblMoneySavedLabel.Location = new System.Drawing.Point(1703, 13);
+            this.lblMoneySavedLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMoneySavedLabel.Name = "lblMoneySavedLabel";
-            this.lblMoneySavedLabel.Size = new System.Drawing.Size(174, 32);
+            this.lblMoneySavedLabel.Size = new System.Drawing.Size(272, 51);
             this.lblMoneySavedLabel.TabIndex = 2;
             this.lblMoneySavedLabel.Text = "Money Saved:";
             this.lblMoneySavedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -96,9 +98,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1284, 43);
+            this.button1.Location = new System.Drawing.Point(2086, 69);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.Size = new System.Drawing.Size(153, 46);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -106,9 +109,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1284, 78);
+            this.button2.Location = new System.Drawing.Point(2086, 125);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
+            this.button2.Size = new System.Drawing.Size(153, 46);
             this.button2.TabIndex = 4;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -116,9 +120,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1284, 113);
+            this.button3.Location = new System.Drawing.Point(2086, 181);
+            this.button3.Margin = new System.Windows.Forms.Padding(5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.Size = new System.Drawing.Size(153, 46);
             this.button3.TabIndex = 5;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -132,9 +137,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(731, 154);
+            this.button4.Location = new System.Drawing.Point(1188, 246);
+            this.button4.Margin = new System.Windows.Forms.Padding(5);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 29);
+            this.button4.Size = new System.Drawing.Size(153, 46);
             this.button4.TabIndex = 6;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
@@ -142,11 +148,11 @@
             // 
             // FrmMall
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1338, 931);
+            this.ClientSize = new System.Drawing.Size(2174, 1490);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -154,7 +160,7 @@
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
             this.Controls.Add(this.panMall);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "FrmMall";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Attack of the Karens!!";
