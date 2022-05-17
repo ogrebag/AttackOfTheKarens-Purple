@@ -88,15 +88,34 @@ namespace AttackOfTheKarens
                             break;
                         case 'S':
                             pic = CreatePic(Properties.Resources.superkaren, top, left);
-                            s = new Store(new SuperKaren(pic)
+                            s = new Store(new Karen(pic)
                             {
                                 Row = top / CELL_SIZE,
                                 Col = left / CELL_SIZE,
+                                Health = 1000,
                             });
                             stores.Add(s);
                             break;
                         case 'o':
-                            picOwner = CreatePic(Properties.Resources.owner, top, left);
+                            int n = rand.Next(5);
+                            switch (n)
+                            {
+                                case 0:
+                                    picOwner = CreatePic(Properties.Resources.owner, top, left);
+                                    break;
+                                case 1:
+                                    picOwner = CreatePic(Properties.Resources.owner_pi, top, left);
+                                    break;
+                                case 2:
+                                    picOwner = CreatePic(Properties.Resources.owner_w, top, left);
+                                    break;
+                                case 3:
+                                    picOwner = CreatePic(Properties.Resources.owner_p, top, left);
+                                    break;
+                                case 4:
+                                    picOwner = CreatePic(Properties.Resources.owner_r, top, left);
+                                    break;
+                            }
                             xOwner = left / CELL_SIZE;
                             yOwner = top / CELL_SIZE;
                             panMall.Controls.Add(picOwner);
@@ -328,5 +347,6 @@ namespace AttackOfTheKarens
                 }
             }
         }
+
     }
 }

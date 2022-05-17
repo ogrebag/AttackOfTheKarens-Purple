@@ -10,7 +10,7 @@ namespace KarenLogic {
     /// </summary>
     public int Row { get; set; }
     public int Col { get; set; }
-    public int Health { get; private set; }
+    public int Health { get; set; }
     public bool IsPresent { get; private set; }
 
     /// <summary>

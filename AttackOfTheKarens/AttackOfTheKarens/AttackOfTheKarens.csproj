@@ -75,7 +75,7 @@
     <None Update="data\mall.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="data\owner.png">
+    <None Update="data\owner_r.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="data\title.png">
