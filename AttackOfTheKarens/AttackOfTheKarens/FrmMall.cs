@@ -62,7 +62,7 @@ namespace AttackOfTheKarens {
       panMall.Controls.Clear();
       int top = 0;
       int left = 0;
-
+            //pic
       PictureBox pic = null;
       foreach (char[] array in map) {
         foreach (char c in array) {
