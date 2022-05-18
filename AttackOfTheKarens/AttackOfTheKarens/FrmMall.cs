@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
-
+//namespace
 namespace AttackOfTheKarens {
   public partial class FrmMall : Form {
     // consts
