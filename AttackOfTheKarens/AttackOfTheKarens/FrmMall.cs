@@ -111,7 +111,7 @@ namespace AttackOfTheKarens {
       lblMoneySavedLabel.Left = this.Width - lblMoneySavedLabel.Width - 10;
       lblMoneySavedLabel.Top = 0;
       lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
-
+            //button
         Button PU1 = new Button();
         PU1.Location = new Point(1369, 100);
         PU1.Text = "Speed Up";
