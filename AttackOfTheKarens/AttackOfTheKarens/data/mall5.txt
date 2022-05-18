@@ -4,9 +4,9 @@ ewww             wwwf
 |  wwwwwww wwwwwww  |
 |        www        |
 e----b    w    a----f
-|K   0L   w   L1   K|
+|K0000L   w   L1111K|
 e----d    w    c----f
 |wwwww    w    wwwww|
 e----b    w    a----f
-|K   2L   o   L3   K|
+|K2222L   o   L3333K|
 c----h---------h----d

@@ -3,10 +3,10 @@ a-------------------b
 ewww             wwwf
 |  wwwwwww wwwwwww  |
 |        www        |
-e----b   mwm   a----f
-|K   0L   w   L1   K|
+e----b   mw    a----f
+|K0000L   w   L1111K|
 e----d    w    c----f
-|wwwww    w    wwwww|
+|wwwww    wm   wwwww|
 e----b    w    a----f
-|K   2L   o   L3   K|
+|K2222L   o   L3333K|
 c----h---------h----d

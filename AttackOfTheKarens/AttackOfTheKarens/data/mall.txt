@@ -1,12 +1,12 @@
 a---------------g---b
-|               |K  |
-e---b    www    |   |
-| K |    www    c-0-f
-|   1L  L    LL   L |
-|   1La-2-ba-33-b   |
-e-1-d | K ||    |   |
-| L  L2   ||K   3L  |
+|               |K00|
+e---b    www    |000|
+|1K1|    www    c-0-f
+|1111L  L    LL   L |
+|1111 1La-2-ba-33-b |
+e-1-d |2K2||3333|   |
+| L  L2222||K3333L  |
 e--b  c-2-dc-33-d   |
-|  4L   L    LL   ww|
-|K 4L   o         ww|
+|444L   L    LL   ww|
+|K44L   o         ww|
 c-------------------d
