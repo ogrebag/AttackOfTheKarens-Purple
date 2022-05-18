@@ -16,7 +16,8 @@ namespace AttackOfTheKarens
         private const int FORM_PADDING = 60;
         private const int CELL_SIZE = 64;
         private readonly Random rand = new Random();
-        private readonly Color[] colors = new Color[5] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow };
+        private readonly Color[] colors = new Color[15] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow, Color.Beige, Color.Firebrick, Color.GhostWhite, Color.PeachPuff, 
+        Color.Gainsboro, Color.Salmon, Color.Thistle, Color.SlateGray, Color.Azure, Color.DarkSeaGreen };
 
         // other privates
         private SoundPlayer player;
