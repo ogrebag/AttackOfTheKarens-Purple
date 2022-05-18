@@ -101,7 +101,7 @@ namespace AttackOfTheKarens {
         left = 0;
         top += CELL_SIZE;
       }
-
+      //owner to front
       picOwner.BringToFront();
       panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
       panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
