@@ -51,7 +51,7 @@ namespace AttackOfTheKarens {
         Height = CELL_SIZE,
       };
     }
-
+        //wall
     private PictureBox CreateWall(Color color, Image img, int top, int left) {
       PictureBox picWall = CreatePic(img, top, left);
       picWall.Image.Tint(color);
