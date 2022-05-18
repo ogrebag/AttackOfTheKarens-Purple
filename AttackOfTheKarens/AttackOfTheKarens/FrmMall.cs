@@ -43,6 +43,7 @@ namespace AttackOfTheKarens {
 
     private PictureBox CreatePic(Image img, int top, int left) {
       return new PictureBox() {
+          //image
         Image = img,
         Top = top,
         Left = left,
