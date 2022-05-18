@@ -38,6 +38,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button4 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // panMall
@@ -158,6 +159,12 @@
             this.timer2.Interval = 30000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 120;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // FrmMall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -202,5 +209,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Timer timer3;
     }
 }

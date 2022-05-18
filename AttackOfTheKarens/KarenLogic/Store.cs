@@ -4,6 +4,7 @@
     private bool containsOwner;
     private bool containsBomb;
     private bool horde;
+    int bombNum = 0;
 
     public Store(Karen karen) {
       this.karen = karen;
@@ -49,10 +50,10 @@
             {
             karen.Damage(1);
             }
-            if (!karen.IsPresent && horde)
-            {
-                karen.Appear();
-            }
+        if (!karen.IsPresent && horde)
+        {
+            karen.Appear();
+        }
     }
 
     public void Drain()

@@ -26,11 +26,18 @@ namespace AttackOfTheKarens {
     private PictureBox picOwner2;
     private int xOwner2;
     private int yOwner2;
-    private char[][] map;
+    private PictureBox picOwner3;
+    private int xOwner3;
+    private int yOwner3;
+        private char[][] map;
     private List<Store> stores;
-    private string fileContents = File.ReadAllText("data/mall5.txt");
+    private string fileContents = File.ReadAllText("data/mall1.txt");
     private bool paused = false;
     private int speed = 250;
+    private int bombnum = 0;
+    private int xsKaren;
+    private int ysKaren;
+    private PictureBox sKarenPic;
 
     enum Map
         {
@@ -48,7 +55,8 @@ namespace AttackOfTheKarens {
             map2p2,
             map3p2,
             map4p2,
-            map5p2
+            map5p2,
+            mapwin
         }
 
         // ctor
@@ -154,6 +162,13 @@ namespace AttackOfTheKarens {
                 });
                 stores.Add(s);
                 break;
+            case 'z':
+                picOwner3 = CreatePic(Properties.Resources.owner, top, left);
+                xOwner3 = left / CELL_SIZE;
+                yOwner3 = top / CELL_SIZE;
+                panMall.Controls.Add(picOwner3);
+                picOwner3.BringToFront();
+                            break;
                     }
           left += CELL_SIZE;
           if (pic != null) {
@@ -196,7 +211,8 @@ namespace AttackOfTheKarens {
       tmrKarenSpawner.Enabled = true;
       tmrMoveOwner.Interval = 250;
       timer1.Interval = 250;
-      if(currentMap == Map.map1 || currentMap == Map.map1p || currentMap == Map.map1p2)
+      timer3.Interval = 250;
+            if (currentMap == Map.map1 || currentMap == Map.map1p || currentMap == Map.map1p2)
             {
                 player = new SoundPlayer();
                 player.SoundLocation = "data/bang.wav";
@@ -209,7 +225,7 @@ namespace AttackOfTheKarens {
     }
 
     private bool IsWalkable(int newRow, int newCol) {
-      char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L', 'm'};
+      char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L', 'm', 'z'};
       return walkableTiles.Contains(map[newRow][newCol]);
     }
 
@@ -239,7 +255,21 @@ namespace AttackOfTheKarens {
         return (IsInBounds(newRow, newCol) && IsWalkable(newRow, newCol));
     }
 
-    private new void Move(Direction dir) {
+    private bool CanMove3(Direction dir, out int newRow, out int newCol)
+    {
+        newRow = yOwner3;
+        newCol = xOwner3;
+        switch (dir)
+        {
+            case Direction.UP: newRow--; break;
+            case Direction.DOWN: newRow++; break;
+            case Direction.LEFT: newCol--; break;
+            case Direction.RIGHT: newCol++; break;
+        }
+        return (IsInBounds(newRow, newCol) && IsWalkable(newRow, newCol));
+    }
+
+        private new void Move(Direction dir) {
       if (CanMove(dir, out int newRow, out int newCol)) {
         yOwner = newRow;
         xOwner = newCol;
@@ -301,6 +331,39 @@ namespace AttackOfTheKarens {
             }
         }
 
+        private new void Move3(Direction dir)
+        {
+            if (CanMove3(dir, out int newRow, out int newCol))
+            {
+                yOwner3 = newRow;
+                xOwner3 = newCol;
+                picOwner3.Top = yOwner3 * CELL_SIZE;
+                picOwner3.Left = xOwner3 * CELL_SIZE;
+                char mapTile = map[newRow][newCol];
+                switch (mapTile)
+                {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        stores[int.Parse(mapTile.ToString())].OwnerWalksIn();
+                        break;
+                    case 'L':
+                        foreach (Store store in stores)
+                        {
+                            store.ResetOwner();
+                        }
+                        break;
+                }
+            }
+        }
+
         private void FrmMall_KeyUp(object sender, KeyEventArgs e) {
       switch (e.KeyCode) {
         case Keys.Up: Move(Direction.UP); break;
@@ -311,8 +374,11 @@ namespace AttackOfTheKarens {
     }
 
     private void tmrKarenSpawner_Tick(object sender, EventArgs e) {
-      Store s = stores[rand.Next(stores.Count)];
-      s.ActivateTheKaren();
+            if (currentMap != Map.mapwin)
+            {
+                Store s = stores[rand.Next(stores.Count)];
+                s.ActivateTheKaren();
+            }
     }
 
     private void FrmMall_FormClosed(object sender, FormClosedEventArgs e) {
@@ -376,6 +442,61 @@ namespace AttackOfTheKarens {
                     store.Update();
                     store.BombFinished();
                 }
+                if (currentMap == Map.map5)
+                {
+                    bombnum++;
+                    if(bombnum == 1)
+                    {
+                        sKarenPic = CreatePic(Properties.Resources.superkaren_d1, 685, 375);
+                        sKarenPic.BringToFront();
+                    }
+                    if (bombnum >= 4)
+                    {
+                        tmrMoveOwner.Interval = 250;
+                        timer1.Interval = 250;
+                        bombnum = 0;
+                        tmrKarenSpawner.Interval = 999999999;
+                        Game.AddToScore(100);
+                        currentMap = Map.map1p;
+                        fileContents = File.ReadAllText("data/mall1p1.txt");
+                        FrmMall_Load(null, null);
+                    }
+                }
+
+                if(currentMap == Map.map5p)
+                {
+                    bombnum++;
+                    if (bombnum >= 4)
+                    {
+                        tmrKarenSpawner.Interval = 999999999;
+                        Game.AddToScore(100);
+                        tmrMoveOwner.Interval = 250;
+                        timer1.Interval = 250;
+                        bombnum = 0;
+                        currentMap = Map.map1p2;
+                        fileContents = File.ReadAllText("data/mall1p2.txt");
+                        FrmMall_Load(null, null);
+                    }
+                }
+                if(currentMap == Map.map5p2)
+                {
+                    bombnum++;
+                    if (bombnum >= 4)
+                    {
+                        button1.Enabled = false;
+                        button2.Enabled = false;
+                        button3.Enabled = false;
+                        button4.Enabled = false;
+                        button5.Enabled = false;
+                        timer2.Enabled = false;
+                        tmrKarenSpawner.Interval = 999999999;
+                        tmrMoveOwner.Interval = 999999999;
+                        timer1.Interval = 999999999;
+                        currentMap = Map.mapwin;
+                        fileContents = File.ReadAllText("data/mallwin.txt");
+                        FrmMall_Load(null, null);
+                    }
+                }
             }
 
         }
@@ -384,8 +505,8 @@ namespace AttackOfTheKarens {
         private void button3_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if(money >= 30){
-                Game.SubFromScore(30);
+            if(money >= 20){
+                Game.SubFromScore(20);
                 foreach (Store store in stores)
                 {
                     store.HordeStart();
@@ -398,9 +519,9 @@ namespace AttackOfTheKarens {
         private void button4_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if (money >= 30)
+            if (money >= 50 && (currentMap != Map.map5 || currentMap != Map.map5p || currentMap != Map.map5p2))
             {
-                Game.SubFromScore(30);
+                Game.SubFromScore(50);
                 if (currentMap == Map.map1)
                 {
                     currentMap = Map.map2;
@@ -424,14 +545,6 @@ namespace AttackOfTheKarens {
                 {
                     currentMap = Map.map5;
                     fileContents = File.ReadAllText("data/mall5.txt");
-                    FrmMall_Load(null, null);
-                }
-                else if (currentMap == Map.map5)
-                {
-                    currentMap = Map.map1p;
-                    tmrMoveOwner.Interval = 250;
-                    timer1.Interval = 250;
-                    fileContents = File.ReadAllText("data/mall1p1.txt");
                     FrmMall_Load(null, null);
                 }
                 else if (currentMap == Map.map1p)
@@ -458,14 +571,6 @@ namespace AttackOfTheKarens {
                     fileContents = File.ReadAllText("data/mall5p1.txt");
                     FrmMall_Load(null, null);
                 }
-                else if (currentMap == Map.map5p)
-                {
-                    currentMap = Map.map1p2;
-                    tmrMoveOwner.Interval = 250;
-                    timer1.Interval = 250;
-                    fileContents = File.ReadAllText("data/mall1p2.txt");
-                    FrmMall_Load(null, null);
-                }
                 else if (currentMap == Map.map1p2)
                 {
                     currentMap = Map.map2p2;
@@ -489,13 +594,6 @@ namespace AttackOfTheKarens {
                     currentMap = Map.map5p2;
                     fileContents = File.ReadAllText("data/mall5p2.txt");
                     FrmMall_Load(null, null);
-                }
-                else
-                {
-                    player?.Stop();
-                    //whatever the win screen is, load it
-                    //winscreen.Show();
-                    this.Hide();
                 }
             }
         }
@@ -560,6 +658,12 @@ namespace AttackOfTheKarens {
                 tmrMoveOwner.Interval = speed;
                 timer1.Interval = speed;
             }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            Direction dir = (Direction)rand.Next(4);
+            Move3(dir);
         }
     }
 }
