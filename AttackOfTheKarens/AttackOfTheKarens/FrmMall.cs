@@ -57,7 +57,7 @@ namespace AttackOfTheKarens {
       picWall.Image.Tint(color);
       return picWall;
     }
-
+        //generate Mall
     private void GenerateMall(Color color) {
       panMall.Controls.Clear();
       int top = 0;
