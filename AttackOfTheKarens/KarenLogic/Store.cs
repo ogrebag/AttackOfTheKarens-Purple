@@ -54,5 +54,10 @@
                 karen.Appear();
             }
     }
+
+    public void Drain()
+        {
+            karen.Drain(10);
+        }
   }
 }

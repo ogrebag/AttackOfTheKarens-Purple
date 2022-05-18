@@ -25,6 +25,7 @@
     private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.panMall = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.tmrKarenSpawner = new System.Windows.Forms.Timer(this.components);
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveOwner = new System.Windows.Forms.Timer(this.components);
@@ -36,6 +37,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button4 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // panMall
@@ -48,6 +50,16 @@
             this.panMall.Size = new System.Drawing.Size(641, 719);
             this.panMall.TabIndex = 0;
             this.panMall.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panMall_MouseDown_1);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(741, 225);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(94, 29);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tmrKarenSpawner
             // 
@@ -140,6 +152,12 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 30000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // FrmMall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -147,6 +165,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1338, 931);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -181,5 +200,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button button5;
     }
 }

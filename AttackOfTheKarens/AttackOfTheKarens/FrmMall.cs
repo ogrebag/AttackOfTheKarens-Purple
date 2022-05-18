@@ -28,6 +28,8 @@ namespace AttackOfTheKarens {
     private char[][] map;
     private List<Store> stores;
     private string fileContents = File.ReadAllText("data/mall5.txt");
+    private bool paused = false;
+    private int speed = 250;
 
     enum Map
         {
@@ -178,11 +180,13 @@ namespace AttackOfTheKarens {
             button2.Text = "Bomb";
             button3.Text = "Horde";
             button4.Text = "Next Stage";
+            button5.Text = "Pause";
 
             button1.Location = new Point(1369, 100);
             button2.Location = new Point(1369, 150);
             button3.Location = new Point(1369, 200);
             button4.Location = new Point(1369, 250);
+            button5.Location = new Point(1369, 750);
         }
 
     private void FrmMall_Load(object sender, EventArgs e) {
@@ -335,6 +339,14 @@ namespace AttackOfTheKarens {
             Direction dir = (Direction)rand.Next(4);
             Move2(dir);
         }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if(timer2.Interval > 1000)
+            {
+                timer2.Interval = 1000;
+            }
+            Game.SubFromScore((float).01);
+        }
 
         private void tmrUpdateGame_Tick(object sender, EventArgs e) {
       lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
@@ -348,6 +360,7 @@ namespace AttackOfTheKarens {
                 {
                     Game.SubFromScore(10);
                     tmrMoveOwner.Interval -= 10;
+                    speed = tmrMoveOwner.Interval;
                 }
             }
         }
@@ -357,8 +370,8 @@ namespace AttackOfTheKarens {
         {
             float money = Game.CheckScore();
             
-            if(money >= -999){
-                Game.SubFromScore(50);
+            if(money >= 30){
+                Game.SubFromScore(30);
                 foreach (Store store in stores) {
                     store.BombUsed();
                     store.Update();
@@ -480,7 +493,10 @@ namespace AttackOfTheKarens {
                 }
                 else
                 {
-                    // do stuff
+                    player?.Stop();
+                    //whatever the win screen is, load it
+                    //winscreen.Show();
+                    this.Hide();
                 }
             }
         }
@@ -500,6 +516,10 @@ namespace AttackOfTheKarens {
                 picOwner.Left = xOwner;
                 yOwner = yOwner / CELL_SIZE;
                 xOwner = xOwner / CELL_SIZE;
+                foreach (Store store in stores)
+                {
+                    store.ResetOwner();
+                }
 
                 char mapTile = map[yOwner][xOwner];
                 switch (mapTile)
@@ -523,6 +543,23 @@ namespace AttackOfTheKarens {
                         }
                         break;
                 }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (!paused)
+            {
+                tmrKarenSpawner.Interval = 999999999;
+                tmrMoveOwner.Interval = 999999999;
+                timer1.Interval = 999999999;
+                paused = true;
+            }
+            else
+            {
+                tmrKarenSpawner.Interval = rand.Next(1000, 5000); ;
+                tmrMoveOwner.Interval = speed;
+                timer1.Interval = speed;
             }
         }
     }

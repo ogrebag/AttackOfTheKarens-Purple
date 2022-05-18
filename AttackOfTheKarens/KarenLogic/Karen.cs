@@ -11,7 +11,7 @@ namespace KarenLogic {
     public int Row { get; set; }
     public int Col { get; set; }
     public int Health { get; set; }
-    public bool IsPresent { get; private set; }
+    public bool IsPresent { get; set; }
 
     /// <summary>
     /// This is the image of Karen
@@ -43,5 +43,9 @@ namespace KarenLogic {
         this.IsPresent = false;
       }
     }
-  }
+    public void Drain(int amount)
+        {
+            Game.SubFromScore(amount);
+        }
+    }
 }
