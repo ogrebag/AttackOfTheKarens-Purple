@@ -27,7 +27,7 @@ namespace AttackOfTheKarens {
     private int yOwner2;
     private char[][] map;
     private List<Store> stores;
-    private string fileContents = File.ReadAllText("data/mall1.txt");
+    private string fileContents = File.ReadAllText("data/mall5.txt");
 
     enum Map
         {
@@ -149,7 +149,7 @@ namespace AttackOfTheKarens {
                 {
                     Row = top / CELL_SIZE,
                     Col = left / CELL_SIZE,
-                    Health = 1000,
+                    Health = 3,
                 });
                 stores.Add(s);
                 break;
@@ -193,9 +193,12 @@ namespace AttackOfTheKarens {
       tmrKarenSpawner.Enabled = true;
       tmrMoveOwner.Interval = 250;
       timer1.Interval = 250;
-      player = new SoundPlayer();
-      player.SoundLocation = "data/mall music.wav";
-      player.PlayLooping();
+      if(currentMap == Map.map1 || currentMap == Map.map1p || currentMap == Map.map1p2)
+            {
+                player = new SoundPlayer();
+                player.SoundLocation = "data/bang.wav";
+                player.PlayLooping();
+            }
     }
 
     private bool IsInBounds(int newRow, int newCol) {
@@ -354,7 +357,7 @@ namespace AttackOfTheKarens {
         {
             float money = Game.CheckScore();
             
-            if(money >= 50){
+            if(money >= -999){
                 Game.SubFromScore(50);
                 foreach (Store store in stores) {
                     store.BombUsed();
@@ -383,7 +386,7 @@ namespace AttackOfTheKarens {
         private void button4_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if (money >= -999)
+            if (money >= 30)
             {
                 Game.SubFromScore(30);
                 if (currentMap == Map.map1)
