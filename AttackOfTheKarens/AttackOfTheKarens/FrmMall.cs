@@ -8,14 +8,6 @@ using System.Media;
 using System.Windows.Forms;
 
 namespace AttackOfTheKarens {
-
-    enum Map{
-        map1,
-        map2,
-        map3,
-        map4,
-        mapBoss
-    }
   public partial class FrmMall : Form {
     // consts
     private const int PANEL_PADDING = 10;
@@ -23,17 +15,28 @@ namespace AttackOfTheKarens {
     private const int CELL_SIZE = 64;
     private readonly Random rand = new Random();
     private readonly Color[] colors = new Color[5] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow };
+    private Map currentMap = Map.map1;
 
     // other privates
     private SoundPlayer player;
     private PictureBox picOwner;
     private int xOwner;
     private int yOwner;
+    private PictureBox picOwner2;
+    private int xOwner2;
+    private int yOwner2;
     private char[][] map;
     private List<Store> stores;
+    private string fileContents = File.ReadAllText("data/mall1.txt");
 
-    // public enum
-    Map currentMap = Map.map1;
+    enum Map
+        {
+            map1,
+            map2,
+            map3,
+            map4,
+            mapBoss
+        }
 
         // ctor
         public FrmMall() {
@@ -42,61 +45,15 @@ namespace AttackOfTheKarens {
     }
 
     // functions
-    private void LoadMap() {
-            Random random = new Random();
-            int mapNum = random.Next(1, 4);
-            switch (mapNum)
-            {
-                case 1:
-                    fileContents = File.ReadAllText("data/mall1.txt");
-                    lines = fileContents.Split(Environment.NewLine);
-                    map = new char[lines.Length][];
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        map[i] = lines[i].ToCharArray();
-                    }
-                    break;
-                case 2:
-                    fileContents = File.ReadAllText("data/mall2.txt");
-                    lines = fileContents.Split(Environment.NewLine);
-                    map = new char[lines.Length][];
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        map[i] = lines[i].ToCharArray();
-                    }
-                    break;
-                case 3:
-                    fileContents = File.ReadAllText("data/mall3.txt");
-                    lines = fileContents.Split(Environment.NewLine);
-                    map = new char[lines.Length][];
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        map[i] = lines[i].ToCharArray();
-                    }
-                    break;
-                case 4:
-                    fileContents = File.ReadAllText("data/mall4.txt");
-                    lines = fileContents.Split(Environment.NewLine);
-                    map = new char[lines.Length][];
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        map[i] = lines[i].ToCharArray();
-                    }
-                    break;
-                case 5:
-                    fileContents = File.ReadAllText("data/mall5.txt");
-                    lines = fileContents.Split(Environment.NewLine);
-                    map = new char[lines.Length][];
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        map[i] = lines[i].ToCharArray();
-                    }
-                    break;
-            }
+    private void LoadMap(string fc) {
+      string[] lines = fc.Split(Environment.NewLine);
+      map = new char[lines.Length][];
+      for (int i = 0; i < lines.Length; i++) {
+        map[i] = lines[i].ToCharArray();
+      }
+    }
 
-        }
-
-        private PictureBox CreatePic(Image img, int top, int left) {
+    private PictureBox CreatePic(Image img, int top, int left) {
       return new PictureBox() {
         Image = img,
         Top = top,
@@ -146,7 +103,14 @@ namespace AttackOfTheKarens {
             case 'f': pic = CreateWall(color, Properties.Resources.f, top, left); break;
             case 'g': pic = CreateWall(color, Properties.Resources.g, top, left); break;
             case 'h': pic = CreateWall(color, Properties.Resources.h, top, left); break;
-          }
+            case 'm':
+                picOwner2 = CreatePic(Properties.Resources.owner, top, left);
+                xOwner2 = left / CELL_SIZE;
+                yOwner2 = top / CELL_SIZE;
+                panMall.Controls.Add(picOwner2);
+                picOwner2.BringToFront();
+                break;
+                    }
           left += CELL_SIZE;
           if (pic != null) {
             panMall.Controls.Add(pic);
@@ -179,12 +143,12 @@ namespace AttackOfTheKarens {
 
     private void FrmMall_Load(object sender, EventArgs e) {
       stores = new List<Store>();
-      LoadMap();
+      LoadMap(fileContents);
       GenerateMall(colors[rand.Next(colors.Length)]);
       tmrKarenSpawner.Interval = rand.Next(1000, 5000);
       tmrKarenSpawner.Enabled = true;
       tmrMoveOwner.Interval = 250;
-      timer1.Interval = 60000;
+      timer1.Interval = 250;
       player = new SoundPlayer();
       player.SoundLocation = "data/mall music.wav";
       player.PlayLooping();
@@ -195,7 +159,7 @@ namespace AttackOfTheKarens {
     }
 
     private bool IsWalkable(int newRow, int newCol) {
-      char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L' };
+      char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L', 'm'};
       return walkableTiles.Contains(map[newRow][newCol]);
     }
 
@@ -209,6 +173,20 @@ namespace AttackOfTheKarens {
         case Direction.RIGHT: newCol++; break;
       }
       return (IsInBounds(newRow, newCol) && IsWalkable(newRow, newCol));
+    }
+
+    private bool CanMove2(Direction dir, out int newRow, out int newCol)
+    {
+        newRow = yOwner2;
+        newCol = xOwner2;
+        switch (dir)
+        {
+            case Direction.UP: newRow--; break;
+            case Direction.DOWN: newRow++; break;
+            case Direction.LEFT: newCol--; break;
+            case Direction.RIGHT: newCol++; break;
+        }
+        return (IsInBounds(newRow, newCol) && IsWalkable(newRow, newCol));
     }
 
     private new void Move(Direction dir) {
@@ -240,7 +218,40 @@ namespace AttackOfTheKarens {
       }
     }
 
-    private void FrmMall_KeyUp(object sender, KeyEventArgs e) {
+        private new void Move2(Direction dir)
+        {
+            if (CanMove2(dir, out int newRow, out int newCol))
+            {
+                yOwner2 = newRow;
+                xOwner2 = newCol;
+                picOwner2.Top = yOwner2 * CELL_SIZE;
+                picOwner2.Left = xOwner2 * CELL_SIZE;
+                char mapTile = map[newRow][newCol];
+                switch (mapTile)
+                {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        stores[int.Parse(mapTile.ToString())].OwnerWalksIn();
+                        break;
+                    case 'L':
+                        foreach (Store store in stores)
+                        {
+                            store.ResetOwner();
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void FrmMall_KeyUp(object sender, KeyEventArgs e) {
       switch (e.KeyCode) {
         case Keys.Up: Move(Direction.UP); break;
         case Keys.Down: Move(Direction.DOWN); break;
@@ -272,7 +283,13 @@ namespace AttackOfTheKarens {
       Move(dir);
     }
 
-    private void tmrUpdateGame_Tick(object sender, EventArgs e) {
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Direction dir = (Direction)rand.Next(4);
+            Move2(dir);
+        }
+
+        private void tmrUpdateGame_Tick(object sender, EventArgs e) {
       lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
     }
         // speed up
@@ -322,27 +339,32 @@ namespace AttackOfTheKarens {
         private void button4_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if(money >= 0)
+            if (money >= 30)
             {
-                Game.SubFromScore();
-                if(currentMap == Map.map1)
+                Game.SubFromScore(30);
+                if (currentMap == Map.map1)
                 {
                     currentMap = Map.map2;
-                    // do the thing
+                    fileContents = File.ReadAllText("data/mall2.txt");
+                    FrmMall_Load(null, null);
+
                 }
-                else if(currentMap == Map.map2){
+                else if (currentMap == Map.map2)
+                {
                     currentMap = Map.map3;
-                    // do the thing
+                    fileContents = File.ReadAllText("data/mall3.txt");
+                    FrmMall_Load(null, null);
                 }
-                else if(currentMap == Map.map3)
+                else if (currentMap == Map.map3)
                 {
                     currentMap = Map.map4;
-                    // do the thing
+                    fileContents = File.ReadAllText("data/mall4.txt");
+                    FrmMall_Load(null, null);
                 }
-                else if(currentMap == Map.map4)
+                else if (currentMap == Map.map4)
                 {
                     currentMap = Map.mapBoss;
-                    // do the thing
+                    FrmMall_Load(null, null);
                 }
                 else
                 {

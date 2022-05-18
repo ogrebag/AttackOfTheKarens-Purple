@@ -1,0 +1,12 @@
+a-------g-----------b
+|K      |   wwwwww  |
+e---- 00d   wwwwww  |
+|o    LL    w  a----f
+|          w  L1   K|
+e----b        L1    |
+|K   2L  www   c----f
+|    2L w L     a---f
+e----d  wa3-b   4   |
+| wwwww  |  |   4   |
+| wwwww  |K |   |  K|
+c--------h--h---h---d
