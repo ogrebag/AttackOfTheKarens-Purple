@@ -47,6 +47,7 @@
             this.panMall.Name = "panMall";
             this.panMall.Size = new System.Drawing.Size(641, 719);
             this.panMall.TabIndex = 0;
+            this.panMall.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panMall_MouseDown_1);
             // 
             // tmrKarenSpawner
             // 
@@ -63,12 +64,6 @@
             this.tmrMoveOwner.Enabled = true;
             this.tmrMoveOwner.Interval = 120;
             this.tmrMoveOwner.Tick += new System.EventHandler(this.tmrMoveOwner_Tick);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 120;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // lblMoneySaved
             // 
@@ -129,6 +124,12 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 120;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(731, 154);
@@ -159,6 +160,7 @@
             this.Text = "Attack of the Karens!!";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMall_FormClosed);
             this.Load += new System.EventHandler(this.FrmMall_Load);
+            this.Click += new System.EventHandler(this.FrmMall_Click);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmMall_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();

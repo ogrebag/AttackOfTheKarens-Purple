@@ -1,10 +1,10 @@
 a---------------g---b
-|               |K  |
+|           m   |K  |
 e---b    www    |   |
 | K |    www    c-0-f
 |   1L  L    LL   L |
 |   1La-2-ba-33-b   |
-e-1-d | K ||    |   |
+e-1-d | K ||    |  m|
 | L  L2   ||K   3L  |
 e--b  c-2-dc-33-d   |
 |  4L   L    LL   ww|

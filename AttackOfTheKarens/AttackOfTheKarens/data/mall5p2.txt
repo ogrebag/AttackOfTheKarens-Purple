@@ -1,0 +1,12 @@
+a-------------------b
+|         S         |
+ewww             wwwf
+|  wwwwwww wwwwwww  |
+|        www        |
+e----b   mwm   a----f
+|K   0L   w   L1   K|
+e----d    w    c----f
+|wwwww    w    wwwww|
+e----b    w    a----f
+|K   2L   o   L3   K|
+c----h---------h----d

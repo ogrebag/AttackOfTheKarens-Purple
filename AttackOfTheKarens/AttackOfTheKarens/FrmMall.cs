@@ -35,7 +35,17 @@ namespace AttackOfTheKarens {
             map2,
             map3,
             map4,
-            mapBoss
+            map5,
+            map1p,
+            map2p,
+            map3p,
+            map4p,
+            map5p,
+            map1p2,
+            map2p2,
+            map3p2,
+            map4p2,
+            map5p2
         }
 
         // ctor
@@ -44,8 +54,13 @@ namespace AttackOfTheKarens {
       InitializeComponent();
     }
 
-    // functions
-    private void LoadMap(string fc) {
+        // functions
+
+        private void panMall_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
+        private void LoadMap(string fc) {
       string[] lines = fc.Split(Environment.NewLine);
       map = new char[lines.Length][];
       for (int i = 0; i < lines.Length; i++) {
@@ -87,12 +102,30 @@ namespace AttackOfTheKarens {
               stores.Add(s);
               break;
             case 'o':
-              picOwner = CreatePic(Properties.Resources.owner, top, left);
-              xOwner = left / CELL_SIZE;
-              yOwner = top / CELL_SIZE;
-              panMall.Controls.Add(picOwner);
-              break;
-            case 'w': pic = CreatePic(Properties.Resources.water, top, left); break;
+                int n = rand.Next(5);
+                switch (n)
+                {
+                    case 0:
+                        picOwner = CreatePic(Properties.Resources.owner, top, left);
+                        break;
+                    case 1:
+                        picOwner = CreatePic(Properties.Resources.owner_pi, top, left);
+                        break;
+                    case 2:
+                        picOwner = CreatePic(Properties.Resources.owner_w, top, left);
+                        break;
+                    case 3:
+                        picOwner = CreatePic(Properties.Resources.owner_p, top, left);
+                        break;
+                    case 4:
+                        picOwner = CreatePic(Properties.Resources.owner_r, top, left);
+                        break;
+                }
+                xOwner = left / CELL_SIZE;
+                yOwner = top / CELL_SIZE;
+                panMall.Controls.Add(picOwner);
+                break;
+                        case 'w': pic = CreatePic(Properties.Resources.water, top, left); break;
             case '-': pic = CreateWall(color, Properties.Resources.hline, top, left); break;
             case '|': pic = CreateWall(color, Properties.Resources.vline, top, left); break;
             case 'a': pic = CreateWall(color, Properties.Resources.a, top, left); break;
@@ -110,6 +143,16 @@ namespace AttackOfTheKarens {
                 panMall.Controls.Add(picOwner2);
                 picOwner2.BringToFront();
                 break;
+            case 'S':
+                pic = CreatePic(Properties.Resources.superkaren, top, left);
+                s = new Store(new Karen(pic)
+                {
+                    Row = top / CELL_SIZE,
+                    Col = left / CELL_SIZE,
+                    Health = 1000,
+                });
+                stores.Add(s);
+                break;
                     }
           left += CELL_SIZE;
           if (pic != null) {
@@ -119,6 +162,7 @@ namespace AttackOfTheKarens {
         left = 0;
         top += CELL_SIZE;
       }
+
 
       picOwner.BringToFront();
       panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
@@ -339,7 +383,7 @@ namespace AttackOfTheKarens {
         private void button4_Click(object sender, EventArgs e)
         {
             float money = Game.CheckScore();
-            if (money >= 30)
+            if (money >= -999)
             {
                 Game.SubFromScore(30);
                 if (currentMap == Map.map1)
@@ -363,13 +407,118 @@ namespace AttackOfTheKarens {
                 }
                 else if (currentMap == Map.map4)
                 {
-                    currentMap = Map.mapBoss;
+                    currentMap = Map.map5;
+                    fileContents = File.ReadAllText("data/mall5.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map5)
+                {
+                    currentMap = Map.map1p;
+                    tmrMoveOwner.Interval = 250;
+                    timer1.Interval = 250;
+                    fileContents = File.ReadAllText("data/mall1p1.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map1p)
+                {
+                    currentMap = Map.map2p;
+                    fileContents = File.ReadAllText("data/mall2p1.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map2p)
+                {
+                    currentMap = Map.map3p;
+                    fileContents = File.ReadAllText("data/mall3p1.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map3p)
+                {
+                    currentMap = Map.map4p;
+                    fileContents = File.ReadAllText("data/mall4p1.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map4p)
+                {
+                    currentMap = Map.map5p;
+                    fileContents = File.ReadAllText("data/mall5p1.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map5p)
+                {
+                    currentMap = Map.map1p2;
+                    tmrMoveOwner.Interval = 250;
+                    timer1.Interval = 250;
+                    fileContents = File.ReadAllText("data/mall1p2.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map1p2)
+                {
+                    currentMap = Map.map2p2;
+                    fileContents = File.ReadAllText("data/mall2p2.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map2p2)
+                {
+                    currentMap = Map.map3p2;
+                    fileContents = File.ReadAllText("data/mall3p2.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map3p2)
+                {
+                    currentMap = Map.map4p2;
+                    fileContents = File.ReadAllText("data/mall4p2.txt");
+                    FrmMall_Load(null, null);
+                }
+                else if (currentMap == Map.map4p2)
+                {
+                    currentMap = Map.map5p2;
+                    fileContents = File.ReadAllText("data/mall5p2.txt");
                     FrmMall_Load(null, null);
                 }
                 else
                 {
-                    currentMap = Map.map1;
-                    // prestige
+                    // do stuff
+                }
+            }
+        }
+
+        private void FrmMall_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panMall_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                yOwner = e.Y;
+                xOwner = e.X;
+                picOwner.Top = yOwner;
+                picOwner.Left = xOwner;
+                yOwner = yOwner / CELL_SIZE;
+                xOwner = xOwner / CELL_SIZE;
+
+                char mapTile = map[yOwner][xOwner];
+                switch (mapTile)
+                {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        stores[int.Parse(mapTile.ToString())].OwnerWalksIn();
+                        break;
+                    case 'L':
+                        foreach (Store store in stores)
+                        {
+                            store.ResetOwner();
+                        }
+                        break;
                 }
             }
         }
